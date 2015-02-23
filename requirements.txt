@@ -1,0 +1,6 @@
+ipython
+numpy
+scipy
+matplotlib
+cv2
+solidpython

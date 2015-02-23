@@ -1,0 +1,6 @@
+*.pyc
+*.stl
+*.log
+*.scad
+.ipynb_checkpoints/
+*.DS_Store
