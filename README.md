@@ -10,6 +10,8 @@ This is called the [Brachistochrone problem](http://en.wikipedia.org/wiki/Brachi
 
 This repository contains functions which will let you set up your own version of the problem, sketch out your own solution using your mouse, then generate a 3D-printable ramp to roll marbles down in order to test your design.
 
+A static non-interactive version of the notebook can be found [here](http://www.tristanhearn.com/printable_ramps).
+
 Run `Ramps.ipynb` using IPython Notebook (with the --pylab=inline argument) to
 interactively walk through the process.
 
