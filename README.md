@@ -23,11 +23,11 @@ The functions of this notebook require:
 - scipy
 - matplotlib
 - solidpython
-- OpenCV
+- OpenCV, with python `cv2` bindings
 - OpenSCAD
 
 The python libraries can be installed by running `pip install -r requirements.txt` within the directory that contains this notebook file. 
 
 The computer vision library OpenCV can be installed [by following their installation instructions](http://docs.opencv.org/doc/tutorials/introduction/table_of_content_introduction/table_of_content_introduction.html). OpenCV can be tricky to install. I'd recommend using a system package manager like apt-get or homebrew if possible. On Windows, the easiest way to get started with OpenCV and Python is to use either [Python(x,y)](https://code.google.com/p/pythonxy/) or the [Anaconda Python Distribution](https://store.continuum.io/cshop/anaconda/)
 
-The CAD program OpenSCAD can be [downloaded from here](http://www.openscad.org/downloads.html). This notebook involves calling OpenSCAD from the command line. To make this work, the path to the OpenSCAD binary will need to be given in the next cell.
+The CAD program OpenSCAD can be [downloaded from here](http://www.openscad.org/downloads.html). This notebook involves calling OpenSCAD from the command line. To make this work, the path to the OpenSCAD binary will need to be given in the first code cell of the notebook.
