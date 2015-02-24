@@ -4,6 +4,30 @@ import pylab
 from scipy.ndimage.filters import gaussian_filter1d
 from fit import fit_multiple
 from IPython.display import HTML
+from cycloid import get_times
+
+def Animate_frame(Ys, x, t, names, times=[]):
+    colors = ["b", "g", "r", "y", "k"]
+    for i, y in enumerate(Ys):
+        name = names[i]
+        color = colors[i]
+        if len(times):
+            T = times[i]
+        else:
+            T = get_times(x, y)
+        idx = np.searchsorted(T,t)
+        xx,yy = x[idx], y[idx]
+
+        pylab.title("$t=%2.3f$" % t)
+        pylab.plot(x,y, "%s-" % color)
+        markers = False
+        if xx != x[-1]:
+            pylab.plot(xx, yy, "%so" % color, markersize=10, label=name,
+                        markeredgecolor="k", markeredgewidth=2)
+            markers=True
+    if markers:
+        pylab.legend(numpoints=1)
+
 
 def show_stl(fn):
     """
@@ -60,7 +84,7 @@ def smooth_plot(x, y, a, A, B):
 
 
 drawing = False # true if mouse is pressed
-def get_sketch(A, B):
+def get_sketch(A, B, n_points):
     """
     Function to grab the mouse-driven curve, using OpenCV.
     """
@@ -154,7 +178,7 @@ def get_sketch(A, B):
     Y = np.array(Y)
 
     # resample the collected points uniformly in x
-    x = np.linspace(X.min(), X.max(), X.size)
+    x = np.linspace(X.min(), X.max(), n_points)
     y = np.interp(x, X, Y)
 
     return x, y
@@ -162,6 +186,6 @@ def get_sketch(A, B):
 if __name__ == "__main__":
     A = [0, 95.0] # Start point
     B = [529, 1.0] # End point
-    x,y = get_sketch(A, B)
+    x,y = get_sketch(A, B, 1000)
     pylab.plot(x,-y)
     pylab.show()

@@ -38,29 +38,45 @@ def cycloid(A, B, n = 100):
 
     return X, Y
 
+
+def total_time(x,y):
+    """
+    Estimated time of decent
+    """
+    g=9.8
+    ya = y[0]
+    dy = np.gradient(y, np.gradient(x, edge_order=2), edge_order=2)
+    f = np.sqrt((dy[1:]**2 + 1)/np.abs(ya - y[1:]))
+    return np.trapz(f)/np.sqrt(2*g)/10.
+
+
+def get_times(x, y):
+    T = []
+    for i in xrange(2, len(x)+1):
+        T.append(total_time(x[:i], y[:i]))
+    return T
+
+def objective(Y):
+    global X
+    y2 = np.array([50] + list(Y) + [8.0])
+    return total_time(X,y2)
+
 if __name__ == "__main__":
     from fit import fit_multiple
+    from scipy.optimize import fmin
     import pylab
 
     # start and end points
     A = [0, 50.0]
-    B = [150, 1.0]
+    B = [110, 8.0]
 
     # fit a cycloid
     X, y0 = cycloid(A,B, n=B[0])
-
-    # wavey curve
-    y2 = 0.5*X + 3*np.sin(0.1*X + 4*np.pi/2) - 0.001*(X - 10.)**2
-
-    # parabola
-    y3 = (X - 95.)**2 - 3
-
-    # fit them all to start at A and end at B
-    y0, y1, y2, y3 = fit_multiple([y0, X, y2, y3], A, B)
+    y = fmin(objective, y0[1:-1])
+    print objective(y)
 
     pylab.plot(X,y0)
-    pylab.plot(X,y1)
-    pylab.plot(X,y2)
-    pylab.plot(X,y3)
+    pylab.plot(X[1:-1],y)
+
     pylab.show()
 

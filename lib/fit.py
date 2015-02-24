@@ -16,7 +16,7 @@ def fit_multiple(Ys, A, B, offset=True):
 
     if offset:
         for y in Y:
-            y += -min(dips)
+            y += -min(dips) + 0.01
     return Y
 
 
